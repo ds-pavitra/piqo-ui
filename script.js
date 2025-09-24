@@ -246,44 +246,85 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 window.addEventListener("load", () => {
-  const loader = document.getElementById("loader");
-  const tl = gsap.timeline();
+    const loader = document.getElementById("loader");
+    const tl = gsap.timeline();
 
-  // Step 1: Fade out loader
-  tl.to(loader, { opacity: 0, duration: 0.6 })
-    .set(loader, { display: "none" });
+    // Step 1: Fade out loader
+    tl.to(loader, { opacity: 0, duration: 0.6 })
+        .set(loader, { display: "none" });
 
-  // Step 2: Fade in PIQOINNOVATION
-  tl.to("#intro-logo", { opacity: 1, duration: 1 });
+    // Step 2: Fade in PIQOINNOVATION
+    tl.to("#intro-logo", { opacity: 1, duration: 1 });
 
-  // Step 3: Animate O to center with custom X
-  const oLetter = document.querySelector(".o-letter");
-  const oRect = oLetter.getBoundingClientRect();
+    // Step 3: Animate O to center with custom X
+    const oLetter = document.querySelector(".o-letter");
+    const oRect = oLetter.getBoundingClientRect();
 
-  // Center Y (still automatic)
-  const centerY = window.innerHeight / 2;
-  const offsetY = centerY - (oRect.top + oRect.height / 2);
+    // Center Y (still automatic)
+    const centerY = window.innerHeight / 2;
+    const offsetY = centerY - (oRect.top + oRect.height / 2);
 
-  // Custom X adjustment (you can change this manually)
-  const customX = "-300%"; // +100px to the right, -100px to the left, etc.
+    // Custom X adjustment (you can change this manually)
+    const customX = "-300%"; // +100px to the right, -100px to the left, etc.
 
 
-  // Animate
-  tl.to(oLetter, {
-    x: customX,     // use your custom X
-    y: offsetY,     // still centered vertically
-    scale: 70,
-    duration: 3,
-    ease: "power4.inOut"
-  });
+    // Animate
+    tl.to(oLetter, {
+        x: customX,     // use your custom X
+        y: offsetY,     // still centered vertically
+        scale: 70,
+        duration: 3,
+        ease: "power4.inOut"
+    });
 
-  // Step 4: Fade out PIQOINNOVATION and reveal content
-  tl.to("#intro-logo", { opacity: 0, duration: 0.5 }, "-=1.5");
-  tl.to(
-    ".header, .main, .Design-section, .projects-main-section, .faq-section, .quote-container, .footer-hero-section, .footer-section",
-    { opacity: 1, duration: 1 },
-    "-=1.5"
-  );
+    // Step 4: Fade out PIQOINNOVATION and reveal content
+    tl.to("#intro-logo", { opacity: 0, duration: 0.5 }, "-=1.5");
+    tl.to(
+        ".header, .main, .Design-section, .projects-main-section, .faq-section, .quote-container, .footer-hero-section, .footer-section",
+        { opacity: 1, duration: 1 },
+        "-=1.5"
+    );
+
+    // Step 5: Animate rings in follow-the-leader sequence
+    const green = document.querySelector(".ring-green");
+    const orange = document.querySelector(".ring-orange");
+    const blue = document.querySelector(".ring-blue");
+
+    // Get final positions of rings (based on CSS y:0)
+    const greenFinalY = 0;
+    const orangeFinalY = 0;
+    const blueFinalY = 0;
+
+
+    // 1️⃣ Green ring animates from below
+    tl.fromTo(green,
+        { y: 200, scale: 0, opacity: 0 },
+        { y: greenFinalY, scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" }, "-=0.5"
+    )
+        // 2️⃣ Orange ring animates from green's final position
+        .fromTo(orange,
+            { y: greenFinalY, scale: 0, opacity: 0 },
+            { y: orangeFinalY, scale: 1, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.5"
+        )
+        // 3️⃣ Blue ring animates from orange's final position
+        .fromTo(blue,
+            { y: orangeFinalY, scale: 0, opacity: 0 },
+            { y: blueFinalY, scale: 1, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.5"
+        );
+
+    // Step 6: Move hero-visual + peacock at the same time
+    tl.to([".hero-visual", ".peacock-image-global"], {
+        left: (i, target) => target.classList.contains("peacock-image-global") ? "48vw" : "0vw",
+        duration: 1.5,
+        ease: "power3.inOut"
+    })
+        .set(".hero-content", { visibility: "visible" })
+        .to(".hero-content", {
+            opacity: 1,
+            duration: 1,
+            ease: "power2.out"
+        }, "-=0.6") // fade in while peacock is moving
+
 });
 
 

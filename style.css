@@ -2,7 +2,8 @@
 .peacock-image-global {
   position: fixed;
   top: 20vh;
-  left: 48vw;
+  left: 32vw;
+  /* left: 48vw; */
   width: 100vw;
   height: 100vh;
   pointer-events: none;
@@ -153,8 +154,8 @@ body {
 .hero-content {
   max-width: 550px;
   align-self: baseline;
-  /* display: none;
-  opacity: 0; */
+  visibility: hidden;
+  opacity: 0;
 }
 
 .hero-title {
@@ -179,6 +180,7 @@ body {
   align-items: center;
   position: relative;
   height: 600px;
+  left:-16vw;
 }
 
 .peacock-container {
