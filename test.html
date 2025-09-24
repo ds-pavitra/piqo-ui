@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Piqo Innovation</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8; /* Light gray background for the footer section */
+      }
+
+      /* Hero Section */
+      .hero-section {
+        background-color: #222; /* Dark background */
+        color: #fff;
+        text-align: center;
+        padding-top: 80px; /* Adjust as needed */
+        padding-bottom: 20px;
+        position: relative;
+        overflow: hidden; /* Ensures image doesn't overflow */
+      }
+
+      .hero-text {
+        font-size: clamp(2rem, 5vw, 4rem); /* Responsive font size */
+        font-weight: bold;
+        margin-bottom: 40px;
+        line-height: 1.2;
+        padding: 0 20px;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-text span {
+        color: #ccc; /* Lighter color for 'text of the printing' */
+      }
+
+      .peacock-img-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end; /* Align image to the bottom of its container */
+        height: 250px; /* Or whatever height fits your image and design */
+        position: relative; /* For potential absolute positioning of image */
+        margin-top: 20px; /* Space between text and image */
+      }
+
+      .peacock-img {
+        max-width: 100%; /* Ensure image is responsive */
+        height: auto;
+        display: block; /* Remove extra space below image */
+        position: absolute; /* Position relative to .peacock-img-container */
+        bottom: -50px; /* Adjust this to move the image partially below the fold */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 300px; /* Adjust size of peacock image */
+      }
+
+      /* Footer Section */
+      .footer-section {
+        background-color: #fff;
+        padding: 60px 40px;
+        display: flex;
+        flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
+        justify-content: space-between;
+        max-width: 1200px; /* Limit width of footer content */
+        margin: 0 auto; /* Center the footer content */
+        border-top: 1px solid #eee; /* Light line at the top of the white section */
+      }
+
+      .footer-column {
+        flex: 1; /* Distribute space equally */
+        min-width: 250px; /* Minimum width before wrapping */
+        margin-bottom: 30px; /* Space between columns on wrap */
+        padding-right: 20px; /* Space between columns */
+      }
+
+      .footer-column:last-child {
+        padding-right: 0;
+      }
+
+      .footer-logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .footer-description {
+        font-size: 0.9rem;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .footer-button {
+        background-color: #333; /* Dark button background */
+        color: #fff;
+        padding: 12px 25px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        display: inline-block; /* Allows padding and margin */
+      }
+
+      .footer-heading {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      .footer-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-list li {
+        margin-bottom: 10px;
+      }
+
+      .footer-list a {
+        color: #666;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+      .footer-list a:hover {
+        text-decoration: underline;
+      }
+
+      .contact-info {
+        font-size: 0.9rem;
+        color: #666;
+        line-height: 1.6;
+      }
+
+      .contact-info strong {
+        display: block;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .footer-section {
+          flex-direction: column; /* Stack columns */
+          padding: 40px 20px;
+        }
+
+        .footer-column {
+          min-width: unset; /* Remove min-width */
+          width: 100%; /* Take full width */
+          padding-right: 0;
+          margin-bottom: 40px;
+        }
+
+        .peacock-img {
+          bottom: -30px; /* Adjust for smaller screens if needed */
+          width: 200px;
+        }
+
+        .hero-text {
+          font-size: clamp(1.5rem, 6vw, 3rem);
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero-section">
+      <h1 class="hero-text">
+        Lorem Ipsum is simply dummy <br />
+        <span>text of the printing</span>
+      </h1>
+      <div class="peacock-img-container">
+        <img src="images/peacock.png" alt="Peacock" class="peacock-img" />
+      </div>
+    </div>
+
+    <footer class="footer-section">
+      <div class="footer-column">
+        <div class="footer-logo">Piqo<span>innovation</span></div>
+        <p class="footer-description">
+          Lorem ipsum dolor sit amet, consectetur<br />
+          adipiscing elit. Integer nunc, blandit enim mattis<br />
+          sit eu, neque, aliquam.
+        </p>
+        <a href="#" class="footer-button"></a>
+      </div>
+
+      <div class="footer-column">
+        <h4 class="footer-heading">Product</h4>
+        <ul class="footer-list">
+          <li><a href="#">Design systems</a></li>
+          <li><a href="#">Themes & Templates</a></li>
+          <li><a href="#">Mockups</a></li>
+          <li><a href="#">Presentations</a></li>
+          <li><a href="#">Wireframes Kits</a></li>
+          <li><a href="#">UI Kits</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4 class="footer-heading">Legals</h4>
+        <ul class="footer-list">
+          <li><a href="#">License</a></li>
+          <li><a href="#">Refund policy</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Contacts</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4 class="footer-heading">Contact</h4>
+        <div class="contact-info">
+          <strong>Feel Free get in touch with us via</strong>
+          phone or send us a message<br /><br />
+          (319) 555-0115<br />
+          rony.204330@gmail.com
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
