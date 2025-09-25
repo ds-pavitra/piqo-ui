@@ -1,249 +1,3 @@
-window.addEventListener("DOMContentLoaded", () => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Animate .mainPeacock to .peacockSecond position and size on scroll
-    const mainPeacock = document.querySelector(".mainPeacock");
-    const peacockSecond = document.querySelector(".peacockSecond");
-    const peacockThird = document.querySelector(".peacockThird");
-
-    if (mainPeacock && peacockSecond) {
-        // Get initial and target bounding rects
-        function getRects() {
-            return {
-                main: mainPeacock.getBoundingClientRect(),
-                second: peacockSecond.getBoundingClientRect(),
-            };
-        }
-
-        // Animate using GSAP quickTo for transform
-        // Ensure mainPeacock stays above design backgrounds
-        // Already absolutely positioned globally by CSS
-        mainPeacock.style.zIndex = 2001;
-        ScrollTrigger.create({
-            trigger: ".section-entry",
-            start: "top center",
-            endTrigger: peacockSecond,
-            end: "top center",
-            scrub: true,
-            onUpdate: self => {
-                const { main, second } = getRects();
-                // Target size for mainPeacock at peacockSecond: 250x250px
-                // Target size and position for mainPeacock at peacockSecond
-                const scaleX = 1; // We'll set width/height directly
-                const scaleY = 1;
-                const x = -102.043; // Use your provided transform values
-                const y = 69.7451;
-                const tx = x * self.progress;
-                const ty = y * self.progress;
-                const sx = 1 + (scaleX - 1) * self.progress;
-                const sy = 1 + (scaleY - 1) * self.progress;
-                // Interpolate position and size
-                const currentWidth = 550 + (250 - 550) * self.progress;
-                const currentHeight = 600 + (250 - 600) * self.progress;
-                gsap.to(mainPeacock, {
-                    transform: `translate(${x * self.progress}px, ${y * self.progress}px)`,
-                    width: `${currentWidth}px`,
-                    height: `${currentHeight}px`,
-                    transformOrigin: "0% 0%",
-                    zIndex: 2001,
-                    duration: 0.1,
-                    overwrite: true,
-                });
-            },
-            onLeaveBack: () => {
-                gsap.to(mainPeacock, {
-                    transform: "translate(0%,0%)",
-                    width: "550px",
-                    height: "600px",
-                    transformOrigin: "0% 0%",
-                    zIndex: 2001,
-                    duration: 0.3,
-                    overwrite: true,
-                });
-            },
-            onLeave: () => {
-                const { main, second } = getRects();
-                const scaleX = second.width / main.width;
-                const scaleY = second.height / main.height;
-                const x = second.left - main.left;
-                const y = second.top - main.top;
-                gsap.to(mainPeacock, {
-                    transform: `translate(-102.043px, 69.7451px)`,
-                    width: "250px",
-                    height: "250px",
-                    transformOrigin: "0% 0%",
-                    zIndex: 2001,
-                    duration: 0.3,
-                    overwrite: true,
-                });
-            }
-        });
-    }
-    // Animate .mainPeacock to .peacockThird position and size on .projectEntry scroll
-    if (mainPeacock && peacockThird) {
-        // You can adjust these values to match the visual position of peacockThird
-        const targetX = -605; // Example: move more left
-        const targetY = 0;  // Example: move down
-        const startWidth = 250;
-        const startHeight = 250;
-        const endWidth = 300;
-        const endHeight = 255;
-        ScrollTrigger.create({
-            trigger: ".projectEntry",
-            start: "top center",
-            endTrigger: peacockThird,
-            end: "top center",
-            scrub: true,
-            onUpdate: self => {
-                const tx = targetX * self.progress;
-                const ty = targetY * self.progress;
-                const currentWidth = startWidth + (endWidth - startWidth) * self.progress;
-                const currentHeight = startHeight + (endHeight - startHeight) * self.progress;
-                gsap.to(mainPeacock, {
-                    transform: `translate(${tx}px, ${ty}px)`,
-                    width: `${currentWidth}px`,
-                    height: `${currentHeight}px`,
-                    transformOrigin: "0% 0%",
-                    zIndex: 2001,
-                    duration: 0.1,
-                    overwrite: true,
-                });
-            },
-            onLeaveBack: () => {
-                gsap.to(mainPeacock, {
-                    transform: "translate(-102.043px, 69.7451px)",
-                    width: "250px",
-                    height: "250px",
-                    transformOrigin: "0% 0%",
-                    zIndex: 2001,
-                    duration: 0.3,
-                    overwrite: true,
-                });
-            },
-            onLeave: () => {
-                gsap.to(mainPeacock, {
-                    transform: `translate(${targetX}px, ${targetY}px)`,
-                    width: `${endWidth}px`,
-                    height: `${endHeight}px`,
-                    transformOrigin: "0% 0%",
-                    zIndex: 2001,
-                    duration: 0.3,
-                    overwrite: true,
-                });
-            }
-        });
-    }
-
-    const peacockFourth = document.querySelector('.peacockFourth');
-    if (mainPeacock && peacockFourth) {
-        const targetX = -700;
-        const targetY = 120;
-        const startWidth = 300;
-        const startHeight = 255;
-        const endWidth = 300;
-        const endHeight = 255;
-        ScrollTrigger.create({
-            trigger: ".clinetsEntry",
-            start: "top center",
-            endTrigger: peacockFourth,
-            end: "top center",
-            scrub: true,
-            onUpdate: self => {
-                const tx = targetX * self.progress;
-                const ty = targetY * self.progress;
-                const currentWidth = startWidth + (endWidth - startWidth) * self.progress;
-                const currentHeight = startHeight + (endHeight - startHeight) * self.progress;
-                gsap.to(mainPeacock, {
-                    transform: `translate(${tx}px, ${ty}px)`,
-                    width: `${currentWidth}px`,
-                    height: `${currentHeight}px`,
-                    transformOrigin: "0% 0%",
-                    zIndex: 2001,
-                    duration: 0.1,
-                    overwrite: true,
-                });
-            },
-            onLeaveBack: () => {
-                gsap.to(mainPeacock, {
-                    transform: "translate(-605px, 100px)",
-                    width: "300px",
-                    height: "255px",
-                    transformOrigin: "0% 0%",
-                    zIndex: 2001,
-                    duration: 0.3,
-                    overwrite: true,
-                });
-            },
-            onLeave: () => {
-                gsap.to(mainPeacock, {
-                    transform: `translate(${targetX}px, ${targetY}px)`,
-                    width: `${endWidth}px`,
-                    height: `${endHeight}px`,
-                    transformOrigin: "0% 0%",
-                    zIndex: 2001,
-                    duration: 0.3,
-                    overwrite: true,
-                });
-            }
-        });
-    }
-    // Animate .mainPeacock to .peacockFifth position and size on FAQ section scroll
-    const peacockFifth = document.querySelector('.peacockFifth');
-    if (mainPeacock && peacockFifth) {
-        const targetX = 200;
-        const targetY = 120;
-        const startWidth = 300;
-        const startHeight = 255;
-        const endWidth = 300;
-        const endHeight = 255;
-        ScrollTrigger.create({
-            trigger: ".faq-section",
-            start: "top center",
-            endTrigger: peacockFifth,
-            end: "top center",
-            scrub: true,
-            onUpdate: self => {
-                const tx = targetX * self.progress;
-                const ty = targetY * self.progress;
-                const currentWidth = startWidth + (endWidth - startWidth) * self.progress;
-                const currentHeight = startHeight + (endHeight - startHeight) * self.progress;
-                gsap.to(mainPeacock, {
-                    transform: `translate(${tx}px, ${ty}px)`,
-                    width: `${currentWidth}px`,
-                    height: `${currentHeight}px`,
-                    transformOrigin: "0% 0%",
-                    zIndex: 2001,
-                    duration: 0.1,
-                    overwrite: true,
-                });
-            },
-            onLeaveBack: () => {
-                gsap.to(mainPeacock, {
-                    transform: "translate(-700px, 120px)",
-                    width: "300px",
-                    height: "255px",
-                    transformOrigin: "0% 0%",
-                    zIndex: 2001,
-                    duration: 0.3,
-                    overwrite: true,
-                });
-            },
-            onLeave: () => {
-                gsap.to(mainPeacock, {
-                    transform: `translate(${targetX}px, ${targetY}px)`,
-                    width: `${endWidth}px`,
-                    height: `${endHeight}px`,
-                    transformOrigin: "0% 0%",
-                    zIndex: 2001,
-                    duration: 0.3,
-                    overwrite: true,
-                });
-            }
-        });
-    }
-
-});
-
 
 window.addEventListener("load", () => {
     const loader = document.getElementById("loader");
@@ -260,18 +14,13 @@ window.addEventListener("load", () => {
     const oLetter = document.querySelector(".o-letter");
     const oRect = oLetter.getBoundingClientRect();
 
-    // Center Y (still automatic)
     const centerY = window.innerHeight / 2;
     const offsetY = centerY - (oRect.top + oRect.height / 2);
+    const customX = "-300%";
 
-    // Custom X adjustment (you can change this manually)
-    const customX = "-300%"; // +100px to the right, -100px to the left, etc.
-
-
-    // Animate
     tl.to(oLetter, {
-        x: customX,     // use your custom X
-        y: offsetY,     // still centered vertically
+        x: customX,
+        y: offsetY,
         scale: 70,
         duration: 3,
         ease: "power4.inOut"
@@ -285,36 +34,27 @@ window.addEventListener("load", () => {
         "-=1.5"
     );
 
-    // Step 5: Animate rings in follow-the-leader sequence
+    // Step 5: Animate rings
     const green = document.querySelector(".ring-green");
     const orange = document.querySelector(".ring-orange");
     const blue = document.querySelector(".ring-blue");
 
-    // Get final positions of rings (based on CSS y:0)
-    const greenFinalY = 0;
-    const orangeFinalY = 0;
-    const blueFinalY = 0;
-
-
-    // 1️⃣ Green ring animates from below
     tl.fromTo(green,
         { y: 200, scale: 0, opacity: 0 },
-        { y: greenFinalY, scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" }, "-=0.5"
+        { y: 0, scale: 1, opacity: 1, duration: 0.5, ease: "power3.out" }, "-=0.5"
     )
-        // 2️⃣ Orange ring animates from green's final position
         .fromTo(orange,
-            { y: greenFinalY, scale: 0, opacity: 0 },
-            { y: orangeFinalY, scale: 1, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.5"
+            { y: 0, scale: 0, opacity: 0 },
+            { y: 0, scale: 1, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.5"
         )
-        // 3️⃣ Blue ring animates from orange's final position
         .fromTo(blue,
-            { y: orangeFinalY, scale: 0, opacity: 0 },
-            { y: blueFinalY, scale: 1, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.5"
+            { y: 0, scale: 0, opacity: 0 },
+            { y: 0, scale: 1, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.5"
         );
 
-    // Step 6: Move hero-visual + peacock at the same time
-    tl.to([".hero-visual", ".peacock-image-global"], {
-        left: (i, target) => target.classList.contains("peacock-image-global") ? "48vw" : "0vw",
+    // Step 6: Move hero-visual + show hero-content
+    tl.to(".hero-visual", {
+        left: "0vw",
         duration: 1.5,
         ease: "power3.inOut"
     })
@@ -323,8 +63,127 @@ window.addEventListener("load", () => {
             opacity: 1,
             duration: 1,
             ease: "power2.out"
-        }, "-=0.6") // fade in while peacock is moving
+        }, "-=0.6");
+
+    // ✅ Step 7: On scroll, pin hero & animate
+    gsap.registerPlugin(ScrollTrigger);
+    // Ensure ring-blue is initially visible and small
+    gsap.set(".ring-blue", { scale: 0.5, autoAlpha: 1, y: 0 });
+    gsap.set(".ring-orange", { scale: 0.5, autoAlpha: 1, y: 0 });
+    gsap.set(".ring-green", { scale: 0.5, autoAlpha: 1, y: 0 });
+
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: ".h-container",     // pin the hero section
+            start: "top top",            // when hero hits top of viewport
+            end: "+=2000",                // scroll distance (adjust as needed)
+            scrub: 3,                 // link animation to scroll
+            pin: true,                   // keep hero fixed during animation
+            anticipatePin: 1
+        }
+    })
+        .to(".hero-content", {
+            opacity: 0,
+            duration: 1
+        })
+        .to(".hero-visual", {
+            left: "-16vw",
+            duration: 1.5,
+            ease: "power3.inOut"
+        }, "<")
+
+        .to(".hero-visual", {
+            scale: 0.4,
+            y: () => window.innerHeight - (document.querySelector(".hero-visual").offsetHeight * 0.5) - 80,
+            duration: 1.5,
+            ease: "power3.inOut",
+            transformOrigin: "center center"
+        })
+
+
+        // ✅ Blue ring + background transition AFTER hero-visual moves
+        .to(".ring-blue", {
+            scale: 4.5,
+            y: () => -window.innerHeight * 2, // offscreen
+            autoAlpha: 0,
+            ease: "power3.inOut"
+        })
+        .to(".bg-blue", { opacity: 1, duration: 2, ease: "power2.inOut" }, "<")
+        .to(".bg-black", { opacity: 0, duration: 2, ease: "power2.inOut" }, "-=0.5", "<")
+        .to(".blue-bg-section", {
+            autoAlpha: 1,       // fade in smoothly
+            display: "block",   // show element
+            duration: 1,
+            ease: "power2.inOut",
+            onReverseComplete: () => {
+                // hide on reverse smoothly
+                gsap.set(".blue-bg-section", { display: "none" });
+            }
+        }, "-=1") // overlap with background transition
+
+
+        // ✅ orange ring + background transition AFTER hero-visual moves
+        .to(".ring-orange", {
+            scale: 4.5,
+            y: () => -window.innerHeight * 2, // offscreen
+            autoAlpha: 0,
+            ease: "power3.inOut"
+        }, "=1.5")
+        .to(".blue-bg-section", { display: "none" }, "<")
+        .to(".bg-orange", { opacity: 1, duration: 2, ease: "power2.inOut" }, "<")
+        .to(".bg-blue", { opacity: 0, duration: 2, ease: "power2.inOut" }, "-=0.5", "<")
+        .to(".orange-bg-section", {
+            autoAlpha: 1,       // fade in smoothly
+            display: "block",   // show element
+            duration: 1,
+            ease: "power2.inOut",
+            onReverseComplete: () => {
+                // hide on reverse smoothly
+                gsap.set(".orange-bg-section", { display: "none" });
+            }
+        }, "-=1") // overlap with background transition
+
+
+        // ✅ orange ring + background transition AFTER hero-visual moves
+        .to(".ring-green", {
+            scale: 4.5,
+            y: () => -window.innerHeight * 2, // offscreen
+            autoAlpha: 0,
+            ease: "power3.inOut"
+        }, "=1.5")
+        .to(".orange-bg-section", { display: "none" }, "<")
+        .to(".bg-green", { opacity: 1, duration: 2, ease: "power2.inOut" }, "<")
+        .to(".bg-orange", { opacity: 0, duration: 2, ease: "power2.inOut" }, "-=0.5", "<")
+        .to(".green-bg-section", {
+            autoAlpha: 1,       // fade in smoothly
+            display: "block",   // show element
+            duration: 1,
+            ease: "power2.inOut",
+            onReverseComplete: () => {
+                // hide on reverse smoothly
+                gsap.set(".green-bg-section", { display: "none" });
+            }
+        }, "-=1") // overlap with background transition
+
+    // ✅ Black background stays from projectEntry until footer
+    ScrollTrigger.create({
+        trigger: ".projectEntry",
+        start: "top center",             // when projectEntry reaches middle of viewport
+        endTrigger: ".footer-section",   // keep until footer
+        end: "bottom bottom",
+        onEnter: () => {
+            gsap.to(".bg-black", { opacity: 1, duration: 1.5, ease: "power2.inOut" });
+            gsap.to(".bg-blue, .bg-orange, .bg-green", { opacity: 0, duration: 1.5, ease: "power2.inOut" });
+        },
+        onEnterBack: () => {
+            gsap.to(".bg-black", { opacity: 1, duration: 1.5, ease: "power2.inOut" });
+            gsap.to(".bg-blue, .bg-orange, .bg-green", { opacity: 0, duration: 1.5, ease: "power2.inOut" });
+        }
+    });
+
 
 });
+
+
 
 

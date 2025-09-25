@@ -11,6 +11,14 @@
 
 <body>
 
+
+  <!-- Background layers for smooth transitions -->
+  <div class="bg-layer bg-black"></div> <!-- visible initially -->
+  <div class="bg-layer bg-blue"></div> <!-- fades in when blue ring moves -->
+  <div class="bg-layer bg-orange"></div> <!-- next background change -->
+  <div class="bg-layer bg-green"></div> <!-- next background change -->
+
+
   <!-- Loader -->
   <div id="loader">
     <svg viewBox="0 0 150 150">
@@ -29,7 +37,7 @@
   <header class="header">
     <div class="container">
       <div class="logo">
-        <img src="images/piqo logo White.png" alt="Piqo Innovation" class="logo-image" />
+        <img src="images/piqo-new-logo.png" alt="Piqo Innovation" class="logo-image" />
       </div>
       <nav class="nav">
         <ul class="nav-list">
@@ -48,7 +56,7 @@
   </header>
 
   <main class="main">
-    <div class="container">
+    <div class="container h-container">
       <div class="hero">
         <div class="hero-content">
           <h1 class="hero-title">
@@ -69,175 +77,129 @@
             <div class="ring ring-blue"></div>
             <div class="ring ring-orange"></div>
             <div class="ring ring-green"></div>
-            <div class="peacock-image-global">
+            <div>
               <img class="mainPeacock" src="images/peacock.png" alt="Peacock displaying feathers" />
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </main>
 
 
+        <div class="design-hero-section blue-bg-section">
+          <div class="blue-glow-line">
+            <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <!-- Gradient for the stroke (matches your current colors) -->
+                <linearGradient id="blueGlowGradient" x1="0%" x2="100%">
+                  <stop offset="0%" stop-color="transparent" />
+                  <stop offset="20%" stop-color="#0d10dc" />
+                  <stop offset="50%" stop-color="#1938ff" />
+                  <stop offset="80%" stop-color="#0d10dc" />
+                  <stop offset="100%" stop-color="transparent" />
+                </linearGradient>
+              </defs>
 
-  <main class="Design-section section-entry">
-    <div class="design-hero-section orange-bg">
-      <!-- <div class="glow-line"></div> -->
-      <div class="glow-line">
-        <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <!-- Create the gradient like your old CSS background -->
-            <linearGradient id="glowGradient" x1="0%" x2="100%">
-              <stop offset="0%" stop-color="transparent" />
-              <stop offset="20%" stop-color="#ff4444" />
-              <stop offset="50%" stop-color="#ff6644" />
-              <stop offset="80%" stop-color="#ff4444" />
-              <stop offset="100%" stop-color="transparent" />
-            </linearGradient>
-          </defs>
-
-          <!-- The curve path -->
-          <path d="M 50 100 Q 300 50 550 100" stroke="url(#glowGradient)" stroke-width="3" fill="none"
-            filter="url(#glowFilter)" />
-        </svg>
-      </div>
-
-
-      <div class="design-hero-section">
-        <h1 class="design-title">Design</h1>
-
-        <div class="services-grid">
-          <div class="service-row">
-            <span class="service-item">Ui Design</span>
-            <span class="service-divider">|</span>
-            <span class="service-item">Ux Design</span>
-            <span class="service-divider">|</span>
-            <span class="service-item">User Research</span>
+              <!-- Curved Path -->
+              <path d="M 50 100 Q 300 50 550 100" stroke="url(#blueGlowGradient)" stroke-width="3" fill="none" />
+            </svg>
           </div>
-          <div class="service-row">
-            <span class="service-item">Ui Development</span>
-            <span class="service-divider">|</span>
-            <span class="service-item">Illustration</span>
+
+          <div class="design-hero-section technologyContent">
+            <h1 class="design-title">Technology</h1>
+
+            <div class="services-grid">
+              <div class="service-row">
+                <span class="service-item">Ui Design</span>
+                <span class="service-divider blue-driver">|</span>
+                <span class="service-item">Ux Design</span>
+                <span class="service-divider blue-driver">|</span>
+                <span class="service-item">User Research</span>
+              </div>
+              <div class="service-row">
+                <span class="service-item">Ui Development</span>
+                <span class="service-divider blue-driver">|</span>
+                <span class="service-item">Illustration</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="bottom-image">
-        <div class="design-peacock-container">
-          <div class="ring ring-blue small small-blue"></div>
-          <!-- <div class="ring ring-orange small-orange"></div> -->
-          <div class="ring ring-green small small-green"></div>
-          <div class="peacock-image peacock">
-            <img class="peacockSecond" src="images/peacock.png" alt="Peacock displaying feathers" />
+        <div class="design-hero-section orange-bg-section">
+          <div class="glow-line">
+            <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <linearGradient id="glowGradient" x1="0%" x2="100%">
+                  <stop offset="0%" stop-color="transparent" />
+                  <stop offset="20%" stop-color="#ff4444" />
+                  <stop offset="50%" stop-color="#ff6644" />
+                  <stop offset="80%" stop-color="#ff4444" />
+                  <stop offset="100%" stop-color="transparent" />
+                </linearGradient>
+              </defs>
+
+              <path d="M 50 100 Q 300 50 550 100" stroke="url(#glowGradient)" stroke-width="3" fill="none"
+                filter="url(#glowFilter)" />
+            </svg>
+          </div>
+
+
+          <div class="design-hero-section designContent">
+            <h1 class="design-title">Design</h1>
+
+            <div class="services-grid">
+              <div class="service-row">
+                <span class="service-item">Ui Design</span>
+                <span class="service-divider">|</span>
+                <span class="service-item">Ux Design</span>
+                <span class="service-divider">|</span>
+                <span class="service-item">User Research</span>
+              </div>
+              <div class="service-row">
+                <span class="service-item">Ui Development</span>
+                <span class="service-divider">|</span>
+                <span class="service-item">Illustration</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </main>
 
-  <main class="Design-section">
-    <div class="design-hero-section blue-bg">
-      <!-- <div class="glow-line blue-glow-line"></div> -->
-      <div class="blue-glow-line">
-        <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <!-- Gradient for the stroke (matches your current colors) -->
-            <linearGradient id="blueGlowGradient" x1="0%" x2="100%">
-              <stop offset="0%" stop-color="transparent" />
-              <stop offset="20%" stop-color="#0d10dc" />
-              <stop offset="50%" stop-color="#1938ff" />
-              <stop offset="80%" stop-color="#0d10dc" />
-              <stop offset="100%" stop-color="transparent" />
-            </linearGradient>
-          </defs>
+        <div class="design-hero-section green-bg-section">
+          <div class="green-glow-line">
+            <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <linearGradient id="greenGlowGradient" x1="0%" x2="100%">
+                  <stop offset="0%" stop-color="transparent" />
+                  <stop offset="20%" stop-color="#06ff06" />
+                  <stop offset="50%" stop-color="#08b408" />
+                  <stop offset="80%" stop-color="#06ff06" />
+                  <stop offset="100%" stop-color="transparent" />
+                </linearGradient>
+              </defs>
 
-          <!-- Curved Path -->
-          <path d="M 50 100 Q 300 50 550 100" stroke="url(#blueGlowGradient)" stroke-width="3" fill="none" />
-        </svg>
-      </div>
-
-      <div class="design-hero-section">
-        <h1 class="design-title">Technology</h1>
-
-        <div class="services-grid">
-          <div class="service-row">
-            <span class="service-item">Ui Design</span>
-            <span class="service-divider blue-driver">|</span>
-            <span class="service-item">Ux Design</span>
-            <span class="service-divider blue-driver">|</span>
-            <span class="service-item">User Research</span>
+              <path d="M 50 100 Q 300 50 550 100" stroke="url(#greenGlowGradient)" stroke-width="3" fill="none" />
+            </svg>
           </div>
-          <div class="service-row">
-            <span class="service-item">Ui Development</span>
-            <span class="service-divider blue-driver">|</span>
-            <span class="service-item">Illustration</span>
+
+
+          <div class="design-hero-section marketingContent">
+            <h1 class="design-title">Marketing</h1>
+
+            <div class="services-grid">
+              <div class="service-row">
+                <span class="service-item">Ui Design</span>
+                <span class="service-divider blue-driver green-driver">|</span>
+                <span class="service-item">Ux Design</span>
+                <span class="service-divider blue-driver green-driver">|</span>
+                <span class="service-item">User Research</span>
+              </div>
+              <div class="service-row">
+                <span class="service-item">Ui Development</span>
+                <span class="service-divider blue-driver green-driver">|</span>
+                <span class="service-item">Illustration</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="bottom-image">
-        <div class="design-peacock-container">
-          <!-- <div class="ring ring-blue small small-blue"></div> -->
-          <!-- <div class="ring ring-orange small-orange"></div> -->
-          <div class="ring ring-green small small-green"></div>
-          <div class="peacock-image peacock">
-            <img src="images/peacock.png" alt="Peacock displaying feathers" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <main class="Design-section">
-    <div class="design-hero-section green-bg">
-      <!-- <div class="glow-line green-glow-line"></div> -->
-      <div class="green-glow-line">
-        <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <!-- Green gradient for the stroke -->
-            <linearGradient id="greenGlowGradient" x1="0%" x2="100%">
-              <stop offset="0%" stop-color="transparent" />
-              <stop offset="20%" stop-color="#06ff06" />
-              <stop offset="50%" stop-color="#08b408" />
-              <stop offset="80%" stop-color="#06ff06" />
-              <stop offset="100%" stop-color="transparent" />
-            </linearGradient>
-          </defs>
-
-          <!-- Curved glowing path -->
-          <path d="M 50 100 Q 300 50 550 100" stroke="url(#greenGlowGradient)" stroke-width="3" fill="none" />
-        </svg>
-      </div>
-
-
-      <div class="design-hero-section">
-        <h1 class="design-title">Marketing</h1>
-
-        <div class="services-grid">
-          <div class="service-row">
-            <span class="service-item">Ui Design</span>
-            <span class="service-divider blue-driver green-driver">|</span>
-            <span class="service-item">Ux Design</span>
-            <span class="service-divider blue-driver green-driver">|</span>
-            <span class="service-item">User Research</span>
-          </div>
-          <div class="service-row">
-            <span class="service-item">Ui Development</span>
-            <span class="service-divider blue-driver green-driver">|</span>
-            <span class="service-item">Illustration</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bottom-image">
-        <div class="design-peacock-container">
-          <!-- <div class="ring ring-blue small small-blue"></div> -->
-          <!-- <div class="ring ring-orange small-orange"></div> -->
-          <!-- <div class="ring ring-green small small-green"></div> -->
-          <div class="peacock-image peacock">
-            <img src="images/peacock.png" alt="Peacock displaying feathers" />
-          </div>
-        </div>
       </div>
     </div>
   </main>
