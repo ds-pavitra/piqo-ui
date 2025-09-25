@@ -182,6 +182,26 @@ window.addEventListener("load", () => {
     });
 
 
+
+    gsap.to(".hero-visual", {
+        scrollTrigger: {
+            trigger: ".projectEntry",
+            start: "top center",
+            endTrigger: ".footer-section",
+            end: "bottom bottom",
+            toggleActions: "play reverse play reverse", // enter -> play, leave back -> reverse
+        },
+        x: -475.587,
+        y: 623,
+        scale: 0.58,
+        duration: 2,
+        ease: "power3.inOut",
+        immediateRender: false // ensures reverse works properly
+    });
+
+
+
+
 });
 
 
