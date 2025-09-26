@@ -1,4 +1,27 @@
 
+// FAQ accordion logic (single, dynamic height)
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".faq-item").forEach(item => {
+        const question = item.querySelector(".faq-question");
+        const answer = item.querySelector(".faq-answer");
+        question.addEventListener("click", () => {
+            const isActive = item.classList.contains("active");
+            // Close all items
+            document.querySelectorAll(".faq-item").forEach(faq => {
+                faq.classList.remove("active");
+                if (faq.querySelector(".faq-answer")) {
+                    faq.querySelector(".faq-answer").style.maxHeight = null;
+                }
+            });
+            // Toggle clicked item
+            if (!isActive) {
+                item.classList.add("active");
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            }
+        });
+    });
+});
+
 window.addEventListener("load", () => {
     const loader = document.getElementById("loader");
     const tl = gsap.timeline();
@@ -54,7 +77,7 @@ window.addEventListener("load", () => {
 
     // Step 6: Move hero-visual + show hero-content
     tl.to(".hero-visual", {
-        left: "0vw",
+        left: "0",
         duration: 1.5,
         ease: "power3.inOut"
     })
@@ -200,9 +223,85 @@ window.addEventListener("load", () => {
     });
 
 
+    gsap.to(".hero-visual", {
+        scrollTrigger: {
+            trigger: ".faqEntry",
+            start: "top center",
+            endTrigger: ".footer-section",
+            end: "bottom bottom",
+            toggleActions: "play reverse play reverse", // enter -> play, leave back -> reverse
+        },
+        x: 451.587,
+        y: 1288,
+        scale: 0.58,
+        duration: 2,
+        ease: "power3.inOut",
+        immediateRender: false // ensures reverse works properly
+    });
+
+
+    gsap.to(".hero-visual", {
+        scrollTrigger: {
+            trigger: ".quoteEntry",
+            start: "top center",
+            endTrigger: ".footer-section",
+            end: "bottom bottom",
+            toggleActions: "play reverse play reverse", // enter -> play, leave back -> reverse
+        },
+        x: 0,
+        y: 1860,
+        scale: 1.1,
+        duration: 1.5,
+        opacity:0.5,
+        ease: "power3.inOut",
+        immediateRender: false // ensures reverse works properly
+    });
+
+
+    gsap.to(".hero-visual", {
+        scrollTrigger: {
+            trigger: ".footerEntry",
+            start: "top center",
+            endTrigger: ".footer-section",
+            end: "bottom bottom",
+            toggleActions: "play reverse play reverse", // enter -> play, leave back -> reverse
+        },
+        x: 0,
+        y: 2500,
+        opacity: 1,
+        scale: 0.58,
+        duration: 2,
+        ease: "power3.inOut",
+        immediateRender: false // ensures reverse works properly
+    });
+
+
+
+
+
+
 
 
 });
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    new Swiper(".projects-swiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true
+        },
+        breakpoints: {
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3.5 }
+        }
+    });
+});
+
 
 
 

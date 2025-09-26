@@ -1,3 +1,86 @@
+/* FAQ section scoped styles */
+.faq-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 96px;
+  padding: 40px 0;
+}
+
+.faq-section .faq-content {
+  flex: 2;
+  width: 100%;
+}
+
+.faq-section .faq-title {
+  font-size: 4.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #fff;
+  letter-spacing: -2px;
+}
+
+.faq-section .faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.faq-section .faq-item {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid #595959;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0;
+  min-height: 64px;
+  flex-direction: column;
+}
+
+.faq-section .faq-item:hover .faq-question {
+  color: #fff;
+}
+
+.faq-section .faq-question {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 1.4rem;
+  color: #fff;
+  font-weight: 400;
+  line-height: 1.2;
+  flex: 1;
+}
+
+.faq-section .faq-icon {
+  font-size: 2rem;
+  font-weight: 100;
+  color: #fff;
+  width: 32px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.faq-section .faq-answer {
+  max-width: 600px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s ease;
+  color: #fff;
+  font-size: 1.1rem;
+  margin-left: 32px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
 /* html::-webkit-scrollbar {
   display: none;
 }
@@ -453,18 +536,63 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   /* position: relative; */
   /* overflow: hidden; */
   min-height: 75vh;
   z-index: -2;
 }
 
+.tech-gif {
+  position: absolute;
+  left: 25vw;
+  top: -7vh;
+  z-index: 10;
+}
+
+.tech-gif img {
+  width: 384px;
+  height: 384px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.design-gif {
+  width: 384px;
+  height: 384px;
+  position: absolute;
+  left: 25vw;
+  top: -7vh;
+  z-index: 10;
+}
+
+.design-gif img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.marketing-gif {
+  width: 384px;
+  height: 384px;
+  position: absolute;
+  left: 25vw;
+  top: -7vh;
+  z-index: 10;
+}
+
+.marketing-gif img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
 
 .technologyContent {
   position: absolute;
   left: 23vw;
-  top: -7vh;
+  top: 0;
   z-index: 10;
 }
 
@@ -472,7 +600,7 @@ body {
   position: absolute;
   width: max-content;
   left: 23vw;
-  top: -7vh;
+  top: 0;
   z-index: 10;
 }
 
@@ -480,7 +608,7 @@ body {
   position: absolute;
   width: max-content;
   left: 23vw;
-  top: -7vh;
+  top: 0;
   z-index: 10;
 }
 
@@ -690,7 +818,7 @@ body {
 /* Main Content */
 .projects-main-section {
   padding: 5rem 0;
-  max-width: 1400px;
+  /* max-width: 1400px; */
   margin: 0 auto;
 }
 
@@ -698,6 +826,7 @@ body {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 2rem;
+  padding: 0 100px;
 }
 
 .see-all-link {
@@ -773,7 +902,7 @@ body {
 }
 
 .projects-card {
-  width: 255px;
+  /* width: 255px; */
   height: 335px;
   border-radius: 20px;
 }
@@ -794,8 +923,8 @@ body {
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: #444;
   cursor: pointer;
@@ -888,31 +1017,53 @@ body {
 }
 
 .faq-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: block;
+  /* change from flex to block */
   border-bottom: 1px solid #595959;
-  /* padding: 10px 0; */
   cursor: pointer;
   transition: color 0.3s ease;
-}
-
-.faq-item:hover {
-  color: #ccc;
+  padding: 15px 0;
+  position: relative;
+  z-index: 1002;
 }
 
 .faq-question {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
   font-size: 22px;
-  flex: 1;
 }
 
 .faq-icon {
-  font-size: 3rem;
-  font-weight: 100;
+  font-size: 2.5rem;
+  font-weight: 700;
+  flex-shrink: 0;
 }
+
+.faq-answer {
+  /* max-height: 0; */
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  padding-left: 40px;
+  /* space for icon */
+}
+
+/* Open by default / active */
+.faq-item.active .faq-answer {
+  /* max-height: 100px; */
+  opacity: 1;
+  margin-top: 10px;
+}
+
+.faq-item.active .faq-icon::after {
+  content: "-";
+}
+
+.faq-item:not(.active) .faq-icon::after {
+  content: "+";
+}
+
 
 .align-b {
   align-self: flex-end;
@@ -957,7 +1108,7 @@ body {
   /* max-width: 800px;  */
   aspect-ratio: 24/8;
   /* Maintain proportions */
-  background-image: url("images/color\ back.png");
+  /* background-image: url("images/color\ back.png"); */
   /* This uses your uploaded image */
   background-size: cover;
   background-position: center;
@@ -974,6 +1125,12 @@ body {
   position: relative;
   overflow: hidden;
   gap: 50px;
+}
+
+.color-back {
+  position: absolute;
+  z-index: -1;
+  width: 96%;
 }
 
 .text-content {
@@ -1002,6 +1159,8 @@ body {
   transition: background-color 0.3s ease, border-color 0.3s ease;
   text-decoration: none;
   font-weight: 500;
+  position: relative;
+  z-index: 1000;
 }
 
 /* Footer section */
@@ -1467,4 +1626,53 @@ body {
 .footer-hero-section,
 .footer-section {
   opacity: 0;
+}
+
+.projects-swiper {
+  width: 100%;
+  padding: 0 0 40px 0;
+  position: relative;
+  /* min-height: 300px; */
+  background: transparent;
+  z-index: 1002;
+}
+
+.swiper-slide {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 200px; */
+  transition: transform 0.3s;
+  background: #222;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  z-index: 1002;
+  pointer-events: auto;
+}
+
+
+/* Swiper pagination */
+.swiper-pagination {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+
+.swiper-pagination-bullet {
+  background: #fff;
+  opacity: 0.7;
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  border-radius: 50%;
+  transition: opacity 0.2s;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #007aff;
 }

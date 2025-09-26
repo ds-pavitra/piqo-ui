@@ -5,8 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.cdnfonts.com/css/lufga" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <title>Piqo Innovation - Designing Interfaces Defining Experiences</title>
   <link rel="stylesheet" href="style.css" />
+
 </head>
 
 <body>
@@ -103,6 +105,10 @@
             </svg>
           </div>
 
+          <div class="tech-gif">
+            <img src="./images/tech.gif" alt="tech gif">
+          </div>
+
           <div class="design-hero-section technologyContent">
             <h1 class="design-title">Technology</h1>
 
@@ -141,6 +147,9 @@
             </svg>
           </div>
 
+          <div class="design-gif">
+            <img src="./images/design.gif" alt="design gif">
+          </div>
 
           <div class="design-hero-section designContent">
             <h1 class="design-title">Design</h1>
@@ -179,6 +188,9 @@
             </svg>
           </div>
 
+          <div class="marketing-gif">
+            <img src="./images/marketing.gif" alt="marketing gif">
+          </div>
 
           <div class="design-hero-section marketingContent">
             <h1 class="design-title">Marketing</h1>
@@ -219,164 +231,166 @@
       <section class="projects-section">
         <div class="projects-header">
           <div class="projects-title-container">
-            <div class="peacock-image projects-peacock" id="projectPeacock">
-              <!-- <img class="peacockThird" src="images/peacock.png" alt="Peacock displaying feathers" /> -->
-            </div>
+            <div class="peacock-image projects-peacock" id="projectPeacock"></div>
             <h1 class="projects-title">
-              <span class="title-start">Our</span><span class="title-accent">Project</span>
+              <span class="title-start">Our</span>
+              <span class="title-accent">Project</span>
             </h1>
           </div>
         </div>
 
-        <div class="projects-grid">
-          <div class="projects-card">
-            <img src="images/demo.webp" alt="" />
-          </div>
-
-          <div class="projects-card">
-            <img src="images/demo.webp" alt="" />
-          </div>
-
-          <div class="projects-card">
-            <img src="images/demo.webp" alt="" />
-          </div>
-
-          <!-- <div class="projects-card">
-              <img src="images/demo.webp" alt="" />
+        <!-- ✅ Swiper -->
+        <div class="swiper projects-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="projects-card">
+                <img src="images/demo.webp" alt="" />
+              </div>
             </div>
+            <div class="swiper-slide">
+              <div class="projects-card">
+                <img src="images/demo.webp" alt="" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="projects-card">
+                <img src="images/demo.webp" alt="" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="projects-card">
+                <img src="images/demo.webp" alt="" />
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="projects-card">
+                <img src="images/demo.webp" alt="" />
+              </div>
+            </div>
+          </div>
 
-            <div class="projects-card">
-              <img src="images/demo.webp" alt="" />
-            </div> -->
+          <!-- Pagination -->
+          <div class="swiper-pagination"></div>
+
         </div>
       </section>
-      <div class="pagination-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
     </div>
   </main>
 
-  <!-- Testimonial section -->
-  <main class="projects-main-section clinetsEntry">
-    <div class="projects-container">
-      <h1 class="testimonial-title">What our clients are saying</h1>
-      <!-- <div class="see-all">
-          <a href="#" class="see-all-link">
-            See All
-            <div class="arrow-image">
-              <img src="images/arrow.png" alt="arrow image" />
-            </div>
-          </a>
-        </div> -->
-
-      <section class="testimonial-section">
-        <div class="projects-header">
-          <div class="projects-title-container">
-            <div class="peacock-image projects-peacock">
-              <img class="peacockFourth" src="images/peacock.png" alt="Peacock displaying feathers" />
-            </div>
-            <!-- <h1 class="projects-title">
-                <span class="title-start">Our</span
-                ><span class="title-accent">Project</span>
-              </h1> -->
-          </div>
-        </div>
-
-        <div class="projects-grid">
-          <div class="card">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since t</p>
-            <h3>Lorem Ipsum</h3>
-          </div>
-
-          <div class="card card-b">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since t</p>
-            <h3>Lorem Ipsum</h3>
-          </div>
-
-          <div class="card">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since t</p>
-            <h3>Lorem Ipsum</h3>
-          </div>
-
-          <div class="card card-b">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text ever since t</p>
-            <h3>Lorem Ipsum</h3>
-          </div>
-
-          <!-- <div class="projects-card">
-              <img src="images/demo.webp" alt="" />
-            </div>
-
-            <div class="projects-card">
-              <img src="images/demo.webp" alt="" />
-            </div>
-          </div> -->
-      </section>
-      <div class="pagination-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
-    </div>
-  </main>
 
   <!-- Faq section -->
-  <section class="faq-section">
+  <section class="faq-section faqEntry">
     <!-- Left side -->
     <div class="faq-content">
       <h2 class="faq-title">Faq's</h2>
       <div class="faq-list">
         <div class="faq-item">
           <div class="faq-question">
-            <span class="faq-icon">+</span>
+            <span class="faq-icon"></span>
             <span>What are your areas of focus as a leading UI/UX design company in India?</span>
           </div>
+          <div class="faq-answer">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquam orci sed velit viverra.</p>
+          </div>
         </div>
         <div class="faq-item">
           <div class="faq-question">
-            <span class="faq-icon">+</span>
+            <span class="faq-icon"></span>
             <span>What are your areas of focus as a leading UI/UX design company ?</span>
           </div>
+          <div class="faq-answer">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquam orci sed velit viverra.</p>
+          </div>
         </div>
         <div class="faq-item">
           <div class="faq-question">
-            <span class="faq-icon">+</span>
+            <span class="faq-icon"></span>
             <span>What are your areas of focus as a leading UI/UX design company in jdhhd kaIndia?</span>
           </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-question">
-            <span class="faq-icon">+</span>
-            <span>What are your areas of UI/UX design company in India?</span>
+          <div class="faq-answer">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquam orci sed velit viverra.</p>
           </div>
         </div>
         <div class="faq-item">
           <div class="faq-question">
-            <span class="faq-icon">+</span>
+            <span class="faq-icon"></span>
+            <span>What are your areas of UI/UX design company in India?</span>
+          </div>
+          <div class="faq-answer">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquam orci sed velit viverra.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span class="faq-icon"></span>
             <span>What are your areas of focus as a leading UI/UX design company in ?</span>
+          </div>
+          <div class="faq-answer">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut aliquam orci sed velit viverra.</p>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Right side - Peacock image -->
-    <div class="peacock-image projects-peacock align-b">
-      <img class="peacockFifth" src="images/peacock.png" alt="Peacock displaying feathers" />
-    </div>
+    <div class="peacock-image projects-peacock align-b" id="faqPeacock"></div>
   </section>
 
+
+  <!-- Testimonial section -->
+  <!-- <main class="projects-main-section clinetsEntry">
+    <div class="projects-container">
+      <h1 class="testimonial-title">What our clients are saying</h1>
+      <section class="testimonial-section">
+        <div class="projects-header">
+          <div class="projects-title-container">
+            <div class="peacock-image projects-peacock">
+              <img class="peacockFourth" src="images/peacock.png" alt="Peacock displaying feathers" />
+            </div>
+          </div>
+        </div>
+
+        <div class="projects-grid">
+          <div class="card">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's standard dummy text ever since t</p>
+            <h3>Lorem Ipsum</h3>
+          </div>
+
+          <div class="card card-b">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's standard dummy text ever since t</p>
+            <h3>Lorem Ipsum</h3>
+          </div>
+
+          <div class="card">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's standard dummy text ever since t</p>
+            <h3>Lorem Ipsum</h3>
+          </div>
+
+          <div class="card card-b">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's standard dummy text ever since t</p>
+            <h3>Lorem Ipsum</h3>
+          </div>
+      </section>
+      <div class="pagination-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </main> -->
+
+
+
   <!-- Quote setion -->
-  <div class="quote-container">
+  <div class="quote-container quoteEntry">
+    <img src="./images/color back 1.png" alt="color back" class="color-back">
     <div class="text-content">
       Let's create a measurable impact on your business.
     </div>
@@ -384,13 +398,13 @@
   </div>
 
   <!-- Footer section -->
-  <div class="footer-hero-section">
+  <div class="footer-hero-section footerEntry">
     <h1 class="footer-hero-text">
       Lorem Ipsum is simply dummy <br />
       <span>text of the printing</span>
     </h1>
-    <div class="peacock-img-container">
-      <img src="images/peacock.png" alt="Peacock" class="peacock-img" />
+    <div class="peacock-img-container" id="footerPeacock">
+      <!-- <img src="images/peacock.png" alt="Peacock" class="peacock-img" /> -->
     </div>
   </div>
 
@@ -438,9 +452,12 @@
     </div>
   </footer>
 
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="script.js"></script>
+
 </body>
 
 </html>
