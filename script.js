@@ -1,3 +1,8 @@
+window.history.scrollRestoration = "manual"; // disable browser scroll restore
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+};
+
 document.addEventListener("DOMContentLoaded", function () {
 
     new Swiper(".projects-swiper", {
@@ -111,7 +116,8 @@ window.addEventListener("load", () => {
     gsap.timeline({
         scrollTrigger: {
             trigger: ".h-container",     // pin the hero section
-            start: "top top",            // when hero hits top of viewport
+            start: "top top",
+            endTrigger: ".projectEntry",            // when hero hits top of viewport
             end: "+=2000",                // scroll distance (adjust as needed)
             scrub: 3,                 // link animation to scroll
             pin: true,                   // keep hero fixed during animation
@@ -123,7 +129,7 @@ window.addEventListener("load", () => {
             duration: 1
         })
         .to(".hero-visual", {
-            left: "-16vw",
+            left: "-14vw",
             duration: 1.5,
             ease: "power3.inOut"
         }, "<")
@@ -148,12 +154,12 @@ window.addEventListener("load", () => {
         .to(".bg-black", { opacity: 0, duration: 2, ease: "power2.inOut" }, "-=0.5", "<")
         .to(".blue-bg-section", {
             autoAlpha: 1,       // fade in smoothly
-            display: "block",   // show element
+            opacity: 1,
             duration: 1,
             ease: "power2.inOut",
             onReverseComplete: () => {
                 // hide on reverse smoothly
-                gsap.set(".blue-bg-section", { display: "none" });
+                gsap.set(".blue-bg-section", { opacity: "0" });
             }
         }, "-=1") // overlap with background transition
 
@@ -165,17 +171,17 @@ window.addEventListener("load", () => {
             autoAlpha: 0,
             ease: "power3.inOut"
         }, "=1.5")
-        .to(".blue-bg-section", { display: "none" }, "<")
+        .to(".blue-bg-section", { opacity: "0" }, "<")
         .to(".bg-orange", { opacity: 1, duration: 2, ease: "power2.inOut" }, "<")
         .to(".bg-blue", { opacity: 0, duration: 2, ease: "power2.inOut" }, "-=0.5", "<")
         .to(".orange-bg-section", {
             autoAlpha: 1,       // fade in smoothly
-            display: "block",   // show element
+            opacity: 1,   // show element
             duration: 1,
             ease: "power2.inOut",
             onReverseComplete: () => {
                 // hide on reverse smoothly
-                gsap.set(".orange-bg-section", { display: "none" });
+                gsap.set(".orange-bg-section", { opacity: "0" });
             }
         }, "-=1") // overlap with background transition
 
@@ -187,17 +193,17 @@ window.addEventListener("load", () => {
             autoAlpha: 0,
             ease: "power3.inOut"
         }, "=1.5")
-        .to(".orange-bg-section", { display: "none" }, "<")
+        .to(".orange-bg-section", { opacity: "0" }, "<")
         .to(".bg-green", { opacity: 1, duration: 2, ease: "power2.inOut" }, "<")
         .to(".bg-orange", { opacity: 0, duration: 2, ease: "power2.inOut" }, "-=0.5", "<")
         .to(".green-bg-section", {
             autoAlpha: 1,       // fade in smoothly
-            display: "block",   // show element
+            opacity: 1,   // show element
             duration: 1,
             ease: "power2.inOut",
             onReverseComplete: () => {
                 // hide on reverse smoothly
-                gsap.set(".green-bg-section", { display: "none" });
+                gsap.set(".green-bg-section", { opacity: "0" });
             }
         }, "-=1") // overlap with background transition
 
