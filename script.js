@@ -1,6 +1,19 @@
-
-// FAQ accordion logic (single, dynamic height)
 document.addEventListener("DOMContentLoaded", function () {
+
+    new Swiper(".projects-swiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true
+        },
+        breakpoints: {
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3.5 }
+        }
+    });
+
     document.querySelectorAll(".faq-item").forEach(item => {
         const question = item.querySelector(".faq-question");
         const answer = item.querySelector(".faq-answer");
@@ -252,7 +265,7 @@ window.addEventListener("load", () => {
         y: 1860,
         scale: 1.1,
         duration: 1.5,
-        opacity:0.5,
+        opacity: 0.5,
         ease: "power3.inOut",
         immediateRender: false // ensures reverse works properly
     });
@@ -273,32 +286,6 @@ window.addEventListener("load", () => {
         duration: 2,
         ease: "power3.inOut",
         immediateRender: false // ensures reverse works properly
-    });
-
-
-
-
-
-
-
-
-});
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    new Swiper(".projects-swiper", {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true
-        },
-        breakpoints: {
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3.5 }
-        }
     });
 });
 
