@@ -9,6 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
         slidesPerView: 1,
         spaceBetween: 30,
         loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false
+        },
         pagination: {
             el: ".swiper-pagination",
             clickable: true
@@ -119,7 +123,7 @@ window.addEventListener("load", () => {
             start: "top top",
             endTrigger: ".projectEntry",            // when hero hits top of viewport
             end: "+=2000",                // scroll distance (adjust as needed)
-            scrub: 3,                 // link animation to scroll
+            scrub: 2,                 // link animation to scroll
             pin: true,                   // keep hero fixed during animation
             anticipatePin: 1
         }
@@ -137,7 +141,7 @@ window.addEventListener("load", () => {
         .to(".hero-visual", {
             scale: 0.4,
             y: () => window.innerHeight - (document.querySelector(".hero-visual").offsetHeight * 0.5) - 80,
-            duration: 1.5,
+            duration: 2.5,
             ease: "power3.inOut",
             transformOrigin: "center center"
         })
@@ -148,6 +152,7 @@ window.addEventListener("load", () => {
             scale: 4.5,
             y: () => -window.innerHeight * 2, // offscreen
             autoAlpha: 0,
+            duration: 2.5,
             ease: "power3.inOut"
         })
         .to(".bg-blue", { opacity: 1, duration: 2, ease: "power2.inOut" }, "<")
@@ -169,6 +174,7 @@ window.addEventListener("load", () => {
             scale: 4.5,
             y: () => -window.innerHeight * 2, // offscreen
             autoAlpha: 0,
+            duration: 2.5,
             ease: "power3.inOut"
         }, "=1.5")
         .to(".blue-bg-section", { opacity: "0" }, "<")
@@ -191,6 +197,7 @@ window.addEventListener("load", () => {
             scale: 4.5,
             y: () => -window.innerHeight * 2, // offscreen
             autoAlpha: 0,
+            duration: 2.5,
             ease: "power3.inOut"
         }, "=1.5")
         .to(".orange-bg-section", { opacity: "0" }, "<")
