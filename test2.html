@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Peacock Arc Scroll Component</title>
+    <style>
+        :root {
+            --bg: #0b0b0b;
+            --muted: #bbbbbb;
+            --white: #ffffff;
+            --arc-stroke: rgba(255, 255, 255, 0.9);
+            --pointer-size: 14px;
+            --component-height: min(72vh, 720px);
+            --ease-time: 380ms;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background: linear-gradient(180deg, #060606, #1a0d05 60%);
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        main {
+            min-height: 200vh;
+            padding: 40px 20px;
+        }
+
+        /* so you can scroll */
+
+        /* Component wrapper */
+        .peacock-component {
+            width: min(1100px, 94%);
+            margin: 120px auto;
+            background: transparent;
+            color: var(--white);
+            border-radius: 16px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .peacock-stage {
+            height: var(--component-height);
+            position: relative;
+            display: grid;
+            place-items: center;
+            user-select: none;
+        }
+
+        /* Dark panel behind content to help contrast (slightly transparent) */
+        .panel {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0.55) 100%);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        /* SVG container: responsive */
+        .arc-wrap {
+            position: absolute;
+            inset: 0;
+            /* occupy full panel */
+            display: flex;
+            align-items: flex-end;
+            /* peacock sits low */
+            justify-content: center;
+            pointer-events: none;
+            /* allow clicks to pass to pointers if we enable pointer-events later */
+        }
+
+        /* The SVG: keep responsive width, height less than stage */
+        svg.peacock-svg {
+            width: 92%;
+            max-width: 1000px;
+            height: calc(var(--component-height) * 0.9);
+            max-height: 720px;
+            overflow: visible;
+        }
+
+        /* thin semi-circular arc stroke */
+        .arc {
+            fill: none;
+            stroke: var(--arc-stroke);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0.95;
+        }
+
+        /* small dot markers (we will position with JS) */
+        .pointer {
+            width: var(--pointer-size);
+            height: var(--pointer-size);
+            background: var(--white);
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%) scale(1);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+            transition: transform 220ms cubic-bezier(.2, .9, .2, 1), box-shadow 220ms linear, background-color 220ms;
+            pointer-events: auto;
+            /* allow interaction */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 8;
+        }
+
+        .pointer .inner {
+            width: 8px;
+            height: 8px;
+            background: linear-gradient(180deg, #222, #555);
+            border-radius: 50%;
+        }
+
+        /* scale up focused (center) pointer */
+        .pointer.active {
+            transform: translate(-50%, -50%) scale(1.55);
+            background: var(--white);
+            box-shadow: 0 18px 40px rgba(255, 140, 40, 0.14);
+        }
+
+        /* tooltip style for pointer labels (optional) */
+        .pointer .label {
+            position: absolute;
+            top: -34px;
+            white-space: nowrap;
+            font-size: 13px;
+            color: var(--white);
+            transform: translateX(-50%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 220ms;
+        }
+
+        .pointer:hover .label {
+            opacity: 1;
+        }
+
+        /* The peacock illustration (simple minimalist white silhouette) - placed low */
+        .peacock {
+            position: absolute;
+            bottom: 7%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 34%;
+            min-width: 160px;
+            max-width: 360px;
+            z-index: 5;
+            opacity: 0.98;
+        }
+
+        /* Content block displayed when pointer is centered */
+        .center-content {
+            position: absolute;
+            left: 50%;
+            top: 36%;
+            transform: translate(-50%, -50%);
+            width: min(720px, 86%);
+            text-align: center;
+            color: var(--white);
+            z-index: 9;
+            pointer-events: none;
+        }
+
+        .center-content h3 {
+            margin: 0 0 10px;
+            font-size: clamp(18px, 2.3vw, 28px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .center-content p {
+            margin: 0 auto;
+            font-size: clamp(13px, 1.25vw, 16px);
+            color: #dcdcdc;
+            line-height: 1.6;
+            max-width: 62ch;
+        }
+
+        /* Each content block is absolutely stacked; we will toggle .visible */
+        .content-item {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            opacity: 0;
+            transform: translateY(8px) scale(0.99);
+            transition: opacity var(--ease-time) ease, transform var(--ease-time) ease;
+            pointer-events: none;
+        }
+
+        .content-item.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        /* small helper for mobile layout */
+        @media (max-width:720px) {
+            .peacock {
+                width: 46%;
+                bottom: 6%;
+            }
+
+            .pointer {
+                --pointer-size: 12px;
+            }
+
+            .panel {
+                border-radius: 10px;
+            }
+        }
+
+        /* minimal accessibility focus */
+        .pointer:focus {
+            outline: 3px solid rgba(255, 255, 255, 0.08);
+            outline-offset: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <!-- lots of content above so you can scroll and see the scroll-aware mapping -->
+        <div style="height:40vh"></div>
+
+        <section class="peacock-component" id="peacockComponent" aria-label="Peacock scroll storytelling">
+            <div class="peacock-stage">
+                <div class="panel" aria-hidden="true"></div>
+
+                <!-- SVG that contains the semi-circular arc path (we use an arc path that goes slightly above center) -->
+                <div class="arc-wrap" aria-hidden="true">
+                    <svg class="peacock-svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMax meet">
+                        <!-- define semicircular arc path: from left-bottom to right-bottom, bulging upward -->
+                        <!-- path id used by JS to compute point positions along the curve -->
+                        <path id="arcPath" class="arc" d="M 120 560
+               C 260 220, 940 220, 1080 560" />
+                        <!-- Optional: show a subtle guide center mark (hidden) -->
+                        <!-- The peacock is drawn outside the path below (we place it via HTML for easier control) -->
+                    </svg>
+                </div>
+
+                <!-- Minimalist white peacock illustration (SVG) placed low; simplistic stylized version -->
+                <svg class="peacock" viewBox="0 0 200 200" aria-hidden="true">
+                    <g fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- body -->
+                        <path
+                            d="M100 140 Q 88 122 92 100 Q 96 78 112 70 Q 128 62 138 76 Q 148 90 146 108 Q 144 128 122 140 Q 110 148 100 140Z"
+                            fill="white" stroke="none" opacity="1" />
+                        <!-- neck/head -->
+                        <path d="M112 70 C 110 58 106 50 100 50" stroke="white" stroke-width="4" fill="none" />
+                        <circle cx="100" cy="50" r="4" fill="white" />
+                        <!-- simple feather fan hint (left/right arcs) -->
+                        <path d="M70 110 C 50 70 40 20 100 8" stroke="white" stroke-width="3" fill="none"
+                            opacity="0.9" />
+                        <path d="M130 110 C 150 70 160 20 100 8" stroke="white" stroke-width="3" fill="none"
+                            opacity="0.9" />
+                    </g>
+                </svg>
+
+                <!-- Three pointers: JS will position them on the arc; give accessible labels -->
+                <button class="pointer" id="ptr-0" data-index="0" aria-label="Vision pointer" title="Vision">
+                    <div class="inner"></div>
+                </button>
+                <button class="pointer" id="ptr-1" data-index="1" aria-label="Mission pointer" title="Mission">
+                    <div class="inner"></div>
+                </button>
+                <button class="pointer" id="ptr-2" data-index="2" aria-label="Our Values pointer" title="Our Values">
+                    <div class="inner"></div>
+                </button>
+
+                <!-- Centered content area. Each .content-item corresponds to a pointer index -->
+                <div class="center-content" role="status" aria-live="polite">
+                    <div class="content-item" data-for="0" id="content-0">
+                        <div>
+                            <h3>Vision</h3>
+                            <p>Placeholder Vision text. We envision a future where elegant design and human-centred
+                                thinking illuminate meaningful product experiences.</p>
+                        </div>
+                    </div>
+
+                    <div class="content-item" data-for="1" id="content-1">
+                        <div>
+                            <h3>Mission</h3>
+                            <p>Placeholder Mission text. Our mission is to create delightful and accessible interactions
+                                that solve real problems for real people.</p>
+                        </div>
+                    </div>
+
+                    <div class="content-item" data-for="2" id="content-2">
+                        <div>
+                            <h3>Our Values</h3>
+                            <p>Placeholder Values text. We believe in craft, empathy, and sustainable outcomes —
+                                practices that focus on long-term value and shared success.</p>
+                        </div>
+                    </div>
+                </div> <!-- .center-content -->
+
+            </div> <!-- .peacock-stage -->
+        </section>
+
+        <div style="height:80vh"></div> <!-- extra scroll area -->
+    </main>
+
+    <script>
+        /*
+          Scroll-aware pointers along an SVG arc
+          - The path is a cubic Bezier arc in the SVG (#arcPath).
+          - We'll compute a normalized scroll progress for the component.
+          - For each pointer index i: compute a local progress (0..1) = clamp((globalStage - i), 0, 1)
+            where globalStage = progress * totalStages.
+          - pointer position along arc t = easing(localProgress) -> 0..1 (left->right)
+          - pointer is 'active' (center content visible) if localProgress is near 0.5 (within threshold)
+        */
+
+        (function () {
+            // Helpers
+            const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+            const easeInOut = t => (t < 0.5) ? (2 * t * t) : (-1 + (4 - 2 * t) * t); // a simple easeInOut
+
+            // DOM
+            const comp = document.getElementById('peacockComponent');
+            const path = document.getElementById('arcPath');
+            const pointers = [document.getElementById('ptr-0'), document.getElementById('ptr-1'), document.getElementById('ptr-2')];
+            const contentItems = [
+                document.getElementById('content-0'),
+                document.getElementById('content-1'),
+                document.getElementById('content-2')
+            ];
+
+            if (!path || pointers.some(p => !p)) return;
+
+            // Path metrics
+            let pathLength = path.getTotalLength();
+
+            // number of pointers
+            const N = pointers.length;
+
+            // we map global progress in [0,1] to globalStage in [0,N] so each pointer's local moves from 0->1 when stage passes its index
+            function computeProgress() {
+                // compute progress relative to viewport and component position.
+                // We want 0 when component is below fold; 1 when scrolled further down past component. Tweak formula to feel natural.
+                const rect = comp.getBoundingClientRect();
+                const vh = window.innerHeight || document.documentElement.clientHeight;
+
+                // We'll use the center of the viewport sliding relative to the component's top and bottom:
+                // progress = clamp((vh/2 - rect.top) / (rect.height + vh), 0,1)
+                // This yields 0 when component top is below center, 1 when component bottom is above center (i.e., component passed)
+                const progress = clamp((vh * 0.5 - rect.top) / (rect.height + vh), 0, 1);
+                return progress;
+            }
+
+            // Map local in [0,1] to path t in [0,1] left->right with ease
+            function localToT(local) {
+                // Optional tiny offset to ensure center point corresponds to t ~ 0.5
+                return easeInOut(local);
+            }
+
+            // Place pointer at path t in [0..1]
+            function placePointerAt(pointerEl, t) {
+                // get point at length
+                const len = t * pathLength;
+                const pt = path.getPointAtLength(len);
+                // transform SVG coordinates to page coordinates:
+                // path exists within the svg that is in document; get svg bounding box info
+                const svg = path.ownerSVGElement;
+                const matrix = svg.getScreenCTM();
+                const svgPoint = svg.createSVGPoint();
+                svgPoint.x = pt.x; svgPoint.y = pt.y;
+                const screenPoint = svgPoint.matrixTransform(matrix);
+                // position the pointer element (absolute positioned within component)
+                // component.getBoundingClientRect relative
+                const compRect = comp.getBoundingClientRect();
+                pointerEl.style.left = (screenPoint.x - compRect.left) + 'px';
+                pointerEl.style.top = (screenPoint.y - compRect.top) + 'px';
+            }
+
+            // Update function (called on scroll / resize)
+            function update() {
+                const progress = computeProgress(); // 0..1
+                const globalStage = progress * N; // 0..N
+
+                // for each pointer compute local progress and map to t
+                for (let i = 0; i < N; i++) {
+                    const ptr = pointers[i];
+
+                    // local progress: progress of pointer i along [0..1]
+                    let local = clamp(globalStage - i, 0, 1);
+
+                    // t along arc: left->right = 0..1
+                    const t = localToT(local);
+
+                    // place pointer
+                    placePointerAt(ptr, t);
+
+                    // set active when near the center of its local progress (0.5) within a threshold
+                    const isActive = Math.abs(local - 0.5) < 0.18;
+                    ptr.classList.toggle('active', !!isActive);
+
+                    // manage content visibility
+                    const content = contentItems[i];
+                    if (content) {
+                        // fade in when isActive
+                        content.classList.toggle('visible', !!isActive);
+                    }
+                }
+            }
+
+            // Initial metrics
+            function recalc() {
+                pathLength = path.getTotalLength();
+                update();
+            }
+
+            // Reposition on resize (SVG screen coordinates change)
+            let ticking = false;
+            function onScrollOrResize() {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        update();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }
+
+            // Also allow clicking pointers to jump scroll to their approximate stage
+            pointers.forEach((el, idx) => {
+                el.addEventListener('click', (e) => {
+                    // compute the target progress where this pointer is centered:
+                    // We defined center occurs when local == 0.5 -> globalStage = idx + 0.5 -> progress = (idx + 0.5)/N
+                    const targetProgress = (idx + 0.5) / N;
+                    // Find page scrollTop that yields this progress. We need to invert computeProgress formula.
+                    // computeProgress: progress = clamp((vh/2 - rect.top) / (rect.height + vh), 0,1)
+                    // rect.top = vh/2 - progress*(rect.height+vh)
+                    const rect = comp.getBoundingClientRect();
+                    // But rect depends on current scroll; better to compute desired scroll such that element's top is at given position:
+                    // desired rectTop = vh/2 - progress*(rectHeight + vh)
+                    const vh = window.innerHeight || document.documentElement.clientHeight;
+                    // we need comp height in layout: use offsetHeight
+                    const compRect = comp.getBoundingClientRect();
+                    const compHeight = comp.offsetHeight;
+                    // compute current pageScrollTop
+                    const scrollY = window.scrollY || window.pageYOffset;
+                    // desired top relative to viewport:
+                    const targetRectTop = (vh * 0.5) - targetProgress * (compHeight + vh);
+                    // convert to page coordinate (top of viewport + scrollY)
+                    const targetPageTop = scrollY + targetRectTop;
+                    // So we want document.scrollY such that comp.getBoundingClientRect().top === targetRectTop
+                    // Current compTopPage = scrollY + compRect.top
+                    const compTopPage = scrollY + compRect.top;
+                    const delta = targetPageTop - compTopPage;
+                    const dest = scrollY + delta;
+                    window.scrollTo({ top: dest, behavior: 'smooth' });
+                });
+            });
+
+            // initial calc after images/svg load
+            window.addEventListener('load', () => {
+                recalc();
+            });
+
+            // recalc on resize
+            window.addEventListener('resize', () => {
+                recalc();
+            });
+            // throttle scroll/resize with rAF
+            window.addEventListener('scroll', onScrollOrResize, { passive: true });
+            window.addEventListener('orientationchange', onScrollOrResize);
+
+            // initial update
+            recalc();
+
+        })();
+    </script>
+</body>
+
+</html>

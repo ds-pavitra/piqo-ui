@@ -111,7 +111,7 @@ window.addEventListener("load", () => {
         }, "-=0.6");
 
     // ✅ Step 7: On scroll, pin hero & animate
-    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
     // Ensure ring-blue is initially visible and small
     gsap.set(".ring-blue", { scale: 0.5, autoAlpha: 1, y: 0 });
     gsap.set(".ring-orange", { scale: 0.5, autoAlpha: 1, y: 0 });
@@ -300,6 +300,116 @@ window.addEventListener("load", () => {
         ease: "power3.inOut",
         immediateRender: false // ensures reverse works properly
     });
+
+
+    // --- Vision Section Animation ---
+
+
+    // gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+    const pointers = [
+        { el: "#p1", start: 0.5, end: 1.8 },
+        { el: "#p2", start: 0.35, end: 1.5 },
+        { el: "#p3", start: 0.2, end: 1.3 }
+    ];
+
+    const contentBlock = document.querySelector("#vision-text");
+
+    const contentData = [
+        { title: "Vision", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio." },
+        { title: "Mission", text: "Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet." },
+        { title: "Our Values", text: "Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta." }
+    ];
+
+    // Reference: initial position of first pointer (center)
+    const centerProgress = pointers[0].start;
+
+    // Track last pointer index for forward/reverse scroll
+    let lastTriggeredIndex = -1;
+
+    // Get the SVG path and its total length
+    const path = document.querySelector("#arcPath");
+    const pathLength = path.getTotalLength();
+
+    // Function to get x,y position along the path, allowing overshoot beyond 1
+    function getPositionAlongPath(progress) {
+        const distance = progress * pathLength; // can be > pathLength for overshoot
+        const clampedDistance = Math.min(distance, pathLength);
+        return path.getPointAtLength(clampedDistance);
+    }
+
+    // --- Timeline ---
+    const tls = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".vision-section",
+            start: "top top",
+            end: "+=500", // adjust scroll length for your design
+            scrub: true,
+            pin: true,
+            anticipatePin: 1,
+            onUpdate: self => {
+                const tlProgress = self.progress; // 0 → 1
+                let currentIndex = -1;
+
+                // Move pointers and determine which pointer passed center
+                pointers.forEach((p, i) => {
+                    const pointerProgress = p.start + (p.end - p.start) * tlProgress;
+                    const pos = getPositionAlongPath(pointerProgress);
+                    gsap.set(p.el, { x: pos.x, y: pos.y });
+
+                    if (pointerProgress >= centerProgress) currentIndex = i;
+                });
+
+                // Update text only if pointer index changed
+                if (currentIndex !== lastTriggeredIndex && currentIndex !== -1) {
+                    updateText(currentIndex);
+                    lastTriggeredIndex = currentIndex;
+                }
+
+                // Handle scrolling back before first pointer
+                if (tlProgress <= 0 && lastTriggeredIndex !== 0) {
+                    updateText(0);
+                    lastTriggeredIndex = 0;
+                }
+            },
+            onRefresh: () => { lastTriggeredIndex = -1; }
+        }
+    });
+
+    // Animate pointers along the path for rotation/align
+    pointers.forEach(p => {
+        tls.to(p.el, {
+            motionPath: {
+                path: "#arcPath",
+                align: "#arcPath",
+                alignOrigin: [0.5, 0.5],
+                start: p.start,
+                end: Math.min(p.end, 1), // motionPath cannot exceed 1 for rotation
+                autoRotate: true
+            },
+            ease: "none"
+        }, 0);
+    });
+
+    // --- Text update function ---
+    function updateText(index) {
+        gsap.to(contentBlock, {
+            autoAlpha: 0,
+            duration: 0.4,
+            onComplete: () => {
+                contentBlock.querySelector("h2").textContent = contentData[index].title;
+                contentBlock.querySelector("p").textContent = contentData[index].text;
+                gsap.to(contentBlock, { autoAlpha: 1, duration: 0.4 });
+            }
+        });
+    }
+
+
+
+
+
+
+
 });
 
 
