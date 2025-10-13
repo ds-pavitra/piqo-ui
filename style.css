@@ -799,14 +799,17 @@ body {
 
 .blue-bg-section {
   opacity: 0;
+  display: none;
 }
 
 .orange-bg-section {
   opacity: 0;
+  display: none;
 }
 
 .green-bg-section {
   opacity: 0;
+  display: none;
 }
 
 
@@ -2107,9 +2110,8 @@ body {
 } */
 
 
-.vision-section {
+/* .vision-section {
   height: 100vh;
-  /* position: relative; */
 }
 
 .vision-container {
@@ -2170,9 +2172,87 @@ body {
   color: #d0d0d0;
   font-size: 1rem;
   line-height: 1.6;
+} */
+
+
+
+
+
+
+
+
+
+.vision-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #111;
+  overflow: hidden;
 }
 
+/* Wrap for arc, ensures it's properly centered */
+.ring-wrapper {
+  position: relative;
+  width: 600px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
 
+.vision-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  position: relative;
+  top: 60%;
+}
+
+/* Center image (peacock) */
+.peacock {
+  position: absolute;
+  bottom: -6%;
+  left: 50%;
+  transform: translateX(-50%);
+  /* width: 140px; */
+  /* z-index: 2; */
+}
+
+/* Pointer images */
+.pointer-img {
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  transform: translate(-50%, -50%);
+  /* z-index: 3; */
+}
+
+/* Text block */
+#vision-text {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  z-index: 4;
+}
+
+#vision-text h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+#vision-text p {
+  max-width: 400px;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ddd;
+}
 
 
 
@@ -2254,5 +2334,14 @@ body {
   .marketingContent {
     left: 15vw;
     top: 1vh;
+  }
+
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 600px;
+    left: -15vw;
   }
 }

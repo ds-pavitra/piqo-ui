@@ -77,29 +77,25 @@
 
 
   <section class="vision-section">
-    <div class="vision-container">
-      <div class="ring-wrapper">
-        <svg viewBox="0 0 600 280" class="vision-svg">
-          <!-- Semi-circular white stroke -->
-          <path id="arcPath" d="M100,300 A200,200 0 0,1 500,300" stroke="white" stroke-width="3" fill="none" />
+    <!-- SVG ARC -->
+    <div class="ring-wrapper">
+      <svg viewBox="0 0 600 280" class="vision-svg">
+        <path id="arcPath" d="M100,300 A200,200 0 0,1 500,300" fill="none" stroke="#fff" stroke-width="2" />
+      </svg>
+    </div>
 
-          <!-- Peacock (placed low) -->
-          <image href="images/peacock.png" x="250" y="220" width="100" height="80" class="peacock" />
+    <!-- Center image -->
+    <img id="peacock" class="peacock" src="./images/piqo logo-06.png" alt="peacock" />
 
-          <!-- Pointers -->
-          <circle id="p1" class="pointer" r="8" fill="white" />
-          <circle id="p2" class="pointer" r="8" fill="white" />
-          <circle id="p3" class="pointer" r="8" fill="white" />
-        </svg>
-      </div>
+    <!-- Pointer images -->
+    <img id="p1" class="pointer-img" src="./images/center-pointer.png" alt="p1" />
+    <img id="p2" class="pointer-img" src="./images/pointer.png" alt="p2" />
+    <img id="p3" class="pointer-img" src="./images/pointer.png" alt="p3" />
 
-      <!-- Single text container -->
-      <div class="vision-content">
-        <div class="content-block" id="vision-text">
-          <h2>Vision</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.</p>
-        </div>
-      </div>
+    <!-- Text block -->
+    <div id="vision-text">
+      <h2>Vision</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.</p>
     </div>
   </section>
 
